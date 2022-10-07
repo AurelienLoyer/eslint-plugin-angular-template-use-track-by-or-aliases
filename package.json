@@ -1,0 +1,27 @@
+{
+  "name": "eslint-plugin-angular-template-use-track-by-or-aliases",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo 'no test... 😢'"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "angular-eslint"
+  ],
+  "description": "Just a custom ESLint rule allowing usage of aliases for the rule @angular-eslint/template/use-track-by-function",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases.git"
+  },
+  "author": "Aurélien Loyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases/issues"
+  },
+  "homepage": "https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases#readme"
+}
