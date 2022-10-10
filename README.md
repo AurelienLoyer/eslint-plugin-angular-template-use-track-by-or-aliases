@@ -1,4 +1,4 @@
-# ESLint plugin Angular template `use-track-by` or aliases
+# ESLint plugin Angular template `use-track-by-or-aliases`
 
 If you are using the awesome `@angular-eslint` plugin and especialy the rule `use-track-by-function`,
 you will see that there is no possibility to custom this rule (link to rule configuration). Only params of criticy is allowed ('error', 'warn', ...)
@@ -14,6 +14,7 @@ This plugin is just a duplication of the existing rule but adding customisation 
   - [ ] How to use
   - [ ] How to dev
   - [ ] ...
-- [ ] Add rule
+- [x] Add rule
+- [-] Add tests
 - [ ] Add build script
-- [ ] Add tests
+- [ ] Test the rule on real project
