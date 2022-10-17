@@ -1,14 +1,14 @@
+
 import type {
   TmplAstTemplate,
   TmplAstTextAttribute,
 } from '@angular-eslint/bundled-angular-compiler';
 import { TmplAstBoundAttribute } from '@angular-eslint/bundled-angular-compiler';
-
 import {
   createESLintRule,
   getTemplateParserServices,
 } from '../utils/create-eslint-rule';
-
+import { getOriginalAttributeName } from '../utils/get-original-attribute-name'
 
 interface IOption {
   aliases?: string[],
@@ -26,7 +26,7 @@ export default createESLintRule<Options, MessageIds>({
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Ensures trackBy function is used',
+      description: 'Ensures trackBy function or directive aliases are used',
       recommended: false,
     },
     schema: [
@@ -46,7 +46,7 @@ export default createESLintRule<Options, MessageIds>({
       }
     ],
     messages: {
-      useTrackByOrAliases: 'Missing trackBy function in ngFor directive',
+      useTrackByOrAliases: 'Missing trackBy function in ngFor directive or directive aliases usage',
     },
   },
   defaultOptions: [],
@@ -78,11 +78,11 @@ export default createESLintRule<Options, MessageIds>({
 
         const aliases: string[] = getAliasesOption(context.options);
 
-        if (templateAttrs.some(templateAttr => isAnAlias(aliases, templateAttr))) {
+        if (aliases.length > 0 && templateAttrs.some(templateAttr => isAnAlias(aliases, getOriginalAttributeName(templateAttr)))) {
           return;
         }
 
-        if (attributes.some(attr => isAnAlias(aliases, attr))) {
+        if (aliases.length > 0 && attributes.some(attr => isAnAlias(aliases, getOriginalAttributeName(attr)))) {
           return;
         }
 
@@ -114,17 +114,18 @@ export default createESLintRule<Options, MessageIds>({
 function isNgForTrackBy(
   attribute: TmplAstBoundAttribute | TmplAstTextAttribute,
 ): attribute is TmplAstBoundAttribute & { name: 'ngForTrackBy' } {
+  // console.log(attribute instanceof TmplAstBoundAttribute);
+
   return (
-    attribute instanceof TmplAstBoundAttribute &&
     attribute.name === 'ngForTrackBy'
-  );
+  )
 }
 
-function isAnAlias(
+function isAnAlias( 
   aliases: string[],
-  attribute: TmplAstBoundAttribute | TmplAstTextAttribute,
-): attribute is TmplAstBoundAttribute | TmplAstTextAttribute {
-  return aliases.includes(attribute.name);
+  attribute: string,
+): boolean {
+  return aliases.includes(attribute);
 }
 
 function getAliasesOption(options: IOption[]): string[] {
