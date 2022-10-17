@@ -1,20 +1,25 @@
 {
   "name": "eslint-plugin-angular-template-use-track-by-or-aliases",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc && cp src/index.js dist/ && cp package.json dist/"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "@angular-eslint/bundled-angular-compiler": "13.5.0",
-    "@angular-eslint/template-parser": "13.5.0",
-    "@angular-eslint/utils": "13.5.0",
-    "@angular/compiler": "13.3.11",
+    "@angular-eslint/bundled-angular-compiler": "14.1.2",
+    "@angular-eslint/template-parser": "14.1.2",
+    "@angular-eslint/utils": "14.1.2",
+    "@angular/compiler": "14.1.2",
     "@typescript-eslint/experimental-utils": "5.17.0",
-    "eslint": "8.24.0",
+    "eslint": "8.25.0",
     "jest": "29.1.2",
-    "requireindex": "1.2.0",
     "ts-jest": "28.0.8",
     "ts-node": "^10.9.1",
     "typescript": "4.8.4"
@@ -35,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases/issues"
   },
-  "homepage": "https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases#readme"
+  "homepage": "https://github.com/AurelienLoyer/eslint-plugin-angular-template-use-track-by-or-aliases#readme",
+  "devDependencies": {
+    "@types/eslint": "^8.4.6"
+  }
 }
